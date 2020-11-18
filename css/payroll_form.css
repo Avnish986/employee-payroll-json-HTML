@@ -152,6 +152,13 @@ select{
     cursor: pointer;
 }
 
+error-output{
+    margin-left: 10px;
+    font-size: 12px;
+    font-style: italic;
+    color: red;
+}
+
 .submitButton{
     border: none;
     background-color: #f5f5f5;

@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/payroll_form.css">
     <script defer src="../js/payroll_form.js"></script>
+    <script defer src="../js/employeePayroll.js"></script>
     <title>Employee Payroll Form</title>
 </head>
 <body>
@@ -24,6 +25,7 @@
             <div class="row-content">
                 <label class="label text" for="name">Name</label>
                 <input class="input" type="text" id="name" name="name" placeholder="Your Name.." required>
+                <error-output class = "text-error" for="text"></error-output>
             </div>
             <div class="row-content">
                 <label class="label text" for="profile">Profile image</label>
