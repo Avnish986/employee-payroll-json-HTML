@@ -12,7 +12,7 @@ class EmployeePayrollData{
         else throw "Name is Incorrect!";
     }
 
-    get profilePic(){return this._picture;}
+    get profilePic(){return this._profilePic;}
     set profilePic(profilePic){this._profilePic = profilePic;}
 
     get gender(){return this._gender;}
