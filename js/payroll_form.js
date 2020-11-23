@@ -21,7 +21,22 @@ window.addEventListener('DOMContentLoaded',(event) => {
   salary.addEventListener('input',function(){
       output.textContent = salary.value;
   });
+
+  const startDate = document.querySelector("#startDate");
+const day = document.querySelector("#day");
+const month = document.querySelector("#month");
+const year = document.querySelector("#year");
+const dateError = document.querySelector(".date-error");
+startDate.addEventListener("input", async function(){
+   try{
+   new EmployeePayrollData().startDate = new Date( Date.UTC(year.value, month.value - 1, day.value));
+    dateError.textContent = "";
+  }catch(e){
+    dateError.textContent = e;
+  }
 });
+});
+
 const save = () =>{
   try{
       let employeePayrollData = createEmployeePayroll();
@@ -36,7 +51,7 @@ function createAndUpdateStorage(employeePayrollData){
   let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
 
   if(employeePayrollList != undefined){
-      employeePayrollList.push(EmployeePayrollData);
+      employeePayrollList.push(employeePayrollData);
   } else{
       employeePayrollList = [employeePayrollData];
   }
@@ -45,23 +60,19 @@ function createAndUpdateStorage(employeePayrollData){
 }
 
 const createEmployeePayroll = () => {
-  let employeePayrollData = new EmployeePayrollData();
-  try{
-      employeePayrollData.name = getInputValueById('#name');
-  } catch(e){
-      setTextValue('.text-error',e);
-      throw e;
-  }
-  employeePayrollData.profilePic = getSelectedValues('[name=profile]').pop();
-  employeePayrollData.gender = getSelectedValues('[name=gender]').pop();
-  employeePayrollData.department = getSelectedValues('[name=department]');
-  employeePayrollData.salary = getInputValueById('#salary');
-  employeePayrollData.note = getInputValueById('#notes');
-  let date = getInputValueById('#day')+" "+getInputValueById('#month')+" "+
-          getInputValueById('#year');
-  employeePayrollData.date = Date.parse(date);
-  alert(employeePayrollData.toString());
-  return employeePayrollData;
+  let employee = new EmployeePayrollData();
+  employee.name= document.getElementById("name").value;
+  employee.profilePic = document.querySelector('input[name = profile]:checked').value;
+  employee.gender = document.querySelector('input[name = gender]:checked').value;
+  employee.department =getSelectedValues('[name=department]');
+  employee.salary = document.getElementById("salary").value;
+ var day = document.getElementById("day").value;
+ var month = document.getElementById("month").value;
+ var year = document.getElementById("year").value;
+  employee.note = document.getElementById("notes").value;
+  employee.startDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+
+ return employee;
 }
 
 const getSelectedValues = (propertyValue) => {
